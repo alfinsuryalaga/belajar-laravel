@@ -32,9 +32,7 @@ class TreatmentsRelationManager extends RelationManager
                 TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->minValue(0)
-                    ->step(1000)
-                    ->prefix('Rp '),
+                    ->prefix('$'),
             ]);
     }
 
@@ -46,32 +44,12 @@ class TreatmentsRelationManager extends RelationManager
                 TextColumn::make('description')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('price')->money('Rp. ', true)
-                    ->searchable()
+                TextColumn::make('price')
+                    ->money('usd', true)
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('created_at')
-                    ->label('Created Month')
-                    ->options([
-                        '01' => 'January',
-                        '02' => 'February',
-                        '03' => 'March',
-                        '04' => 'April',
-                        '05' => 'May',
-                        '06' => 'June',
-                        '07' => 'July',
-                        '08' => 'August',
-                        '09' => 'September',
-                        '10' => 'October',
-                        '11' => 'November',
-                        '12' => 'December',
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query->whereMonth('created_at', $data['value']);
-                    })
-                    ->placeholder('All Months')
-                    ->searchable(),
+                
             ])
             ->headerActions([
                 CreateAction::make(),
