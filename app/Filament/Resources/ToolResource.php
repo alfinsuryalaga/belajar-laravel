@@ -51,20 +51,21 @@ class ToolResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                // Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ViewAction::make(),
 
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\ForceDeleteBulkAction::make(),
+                Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -81,7 +82,9 @@ class ToolResource extends Resource
         return [
             'index' => Pages\ListTools::route('/'),
             'create' => Pages\CreateTool::route('/create'),
+            'detail' => Pages\DetailTool::route('/detail'),
             'edit' => Pages\EditTool::route('/{record}/edit'),
+            'view' => Pages\ViewTool::route('/{record}'),
         ];
     }
 
